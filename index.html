@@ -1,85 +1,97 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>CODE1230Assignment2</title>
-  </head>
-  <style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #000000;
-    font-family: "Roboto", sans-serif;
-    font-style: bold;
-    font-size: 24px;
+<head>
+    <meta charset='utf-8' />
+    <title>Assignment3 CODE1230</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <script src='./data.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+body {
+  margin: 0;
+  background: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 800;
 }
-li {
-    float: right;
+
+.container {
+  width: 80%;
+  margin: 0 auto;
 }
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 20px 10px;
-    text-decoration: none;
+
+header {
+  background: #000000;
 }
-li a:hover {
-    background-color: #111;
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
 }
-h1{
-    color: #000000;
-    text-transform: uppercase;
-    font-size: 45px;
-    text-align: center;
-    float: center;
-    
+
+.logo {
+  float: left;
+  padding: 0;
+  width: 300px;
+  height: 150px;
 }
-h3 {
-  color: #000000;
-    font-size: 25px;
-    text-align: center;
-    margin-top: 1px;
-    margin-left: 150px;
-    margin-right: 150px;
+
+nav {
+  float: right;
 }
-h2 {
-    color: #000000;
-    text-transform: uppercase;
-    font-size: 90px;
-    text-align: center;
-    float: center;
-    
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-h5 {
-    color: #000000;
-    font-size: 25px;
-    text-align: center;
-    float: center;
-    
+
+nav li {
+  display: inline-block;
+  margin-left: 100px;
+  padding-top: 50px;
+  position: relative;
 }
-h6 {
-    color: #000000;
-    font-size: 25px;
-    text-align: center;
-    float: center;
-    
+
+nav a {
+  color: #FFFFFF;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 36px;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
 }
 </style>
-<body>
-   <header>
+<header>
+    <div class="container">
+      <img src="CODE Logo.jpg" alt="logo" class="logo">
+      <h1 class="logo"></h1>
 
-        
-<ul>
-  <li><a href="DWN.html">Credits</a></li>
-  <li><a href="Mapss.html">2011 Census</a></li>    
-  <li><a href="Maps.html">2016 Census</a></li>      
-  <li><a class="active" href="index.html">Home</a></li>
-  
-
-
-</ul>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Map.html">Map</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  </body>
-</html>
-
+  </html

@@ -1,0 +1,179 @@
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Assignment3 CODE1230</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <script src='./data.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+
+#map { position: absolute; top:150px; left:0px; bottom:0px; width:100%; }
+
+body {
+  margin: 0;
+  background: #FFFFFF;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 800;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+header {
+  background: #000000;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 0;
+  width: 300px;
+  height: 150px;
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 100px;
+  padding-top: 50px;
+  position: relative;
+}
+
+nav a {
+  color: #FFFFFF;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 36px;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+</style>
+<header>
+    <div class="container">
+      <img src="CODE Logo.jpg" alt="logo" class="logo">
+      <h1 class="logo"></h1>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Map.html">Map</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  </html>
+
+ <div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoib2ZmaWNpYWx6ZXJvIiwiYSI6ImNqbHAydHp5bTIwZm0za2ttZGN0aDJtdzgifQ.eVAm7pdGyrcJp1rmGrERaA';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/light-v9', // stylesheet location
+    center: [151.004105, -33.813002], // starting position [lng, lat]
+    pitch: 45,
+    bearing: -17.6,
+    zoom: 11 // starting zoom
+});
+map.on('load', function() {
+    // Insert the layer beneath any symbol layer.
+    var layers = map.getStyle().layers;
+    var labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+        }
+    }
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': .6
+        }
+    }, labelLayerId);
+});
+map.on('load', function(){
+  map.addLayer({
+    "id":"data",
+    "type":"fill-extrusion",
+    "source": {
+      'type': 'geojson',
+      'data': './map.geojson'
+    },
+    'layout': {
+      'visibility': 'visible'
+        },
+      'paint': {
+            'fill-extrusion-color': {
+              'property': 'colour',
+              'type': 'identity'
+            },
+            'fill-extrusion-height': {
+            'type': 'identity',
+            'property': 'height'
+            },
+            'fill-extrusion-base': {
+            'type': 'identity',
+            'property': 'base_height'
+            },
+            'fill-extrusion-opacity': 1
+          }
+     });
+});
+</script>
+      </header>
+    </body>
+    </html>
